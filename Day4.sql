@@ -32,7 +32,9 @@ INSERT INTO Orders_Info VALUES
 ('electronics','vacuum',145,189.00,'2022/07/15');
 
 /*
-Find the top 2 products in the top 2 categories based on spend amount?
+
+Question: Find the top 2 products in the top 2 categories based on spend amount?
+
 */
 
 SELECT * FROM Orders_Info;
@@ -64,3 +66,24 @@ FROM (
 ) AS subquery
 WHERE product_rank_per_category <= 2
 ORDER BY total_spend DESC;
+
+/*
+
+Question: Get the details of the employee with the second-highest salary from each department
+
+*/
+
+-- 2nd highest salary per department
+
+SELECT * FROM Employee;
+
+SELECT 
+	*
+FROM (
+	SELECT 
+		*,
+		DENSE_RANK() OVER(PARTITION BY department ORDER BY salary DESC) AS salary_rank
+	FROM Employee
+) AS subquery
+WHERE salary_rank = 2 
+ORDER BY salary DESC;

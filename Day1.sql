@@ -1,3 +1,8 @@
+/*
+	Day 1
+	Oct 17, 2024
+*/
+
 DROP DATABASE IF EXISTS SQLChallenge;
 CREATE DATABASE SQLChallenge;
 USE SQLChallenge;
@@ -29,7 +34,7 @@ INSERT INTO Employee (name, department, salary) VALUES
 
 /*
 
-Write the SQL query to find the second highest salary
+Question: Write the SQL query to find the second highest salary
 
 */
 -- Approach 1
@@ -66,7 +71,11 @@ WITH Subquery AS(
 SELECT * FROM Subquery
 WHERE salary_rank = 2;
 
--- Task Question: Get the details of the employee with the second-highest salary from each department
+/*
+
+Question: Get the details of the employee with the second-highest salary from each department
+
+*/
 -- SUBQUERY VERSION
 SELECT *
 FROM(

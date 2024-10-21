@@ -63,7 +63,11 @@ SELECT * FROM Subquery
 WHERE rank = 1
 ORDER BY quantity_sold DESC;
 
--- Write SQL query to find the least-selling products in each category
+/*
+
+Question: Write SQL query to find the least-selling products in each category
+
+*/
 -- Approach 1: Subquery Version
 SELECT
 	*

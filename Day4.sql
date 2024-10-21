@@ -30,3 +30,37 @@ INSERT INTO Orders_Info VALUES
 ('toys','yoyo',141,129.00,'2022/07/15'),
 ('toys','yoyo',145,189.00,'2022/07/15'),
 ('electronics','vacuum',145,189.00,'2022/07/15');
+
+/*
+Find the top 2 products in the top 2 categories based on spend amount?
+*/
+
+SELECT * FROM Orders_Info;
+
+-- Top 2 category based on spend
+WITH cte AS(
+	SELECT 
+		category,
+		SUM(spend) AS total_spend_cat,
+		DENSE_RANK() OVER(ORDER BY SUM(spend) DESC) AS cat_rank
+	FROM Orders_Info
+	GROUP BY category
+)
+
+-- Top 2 products in the Top 2 category
+SELECT
+	*
+FROM (
+	SELECT 
+		o.category,
+		o.product,
+		SUM(o.spend) AS total_spend,
+		DENSE_RANK() OVER(PARTITION BY o.category ORDER BY SUM(o.spend) DESC) AS product_rank_per_category
+	FROM Orders_Info AS o
+	JOIN cte AS c
+		ON o.category = c.category
+	WHERE cat_rank <= 2
+	GROUP BY o.category, o.product
+) AS subquery
+WHERE product_rank_per_category <= 2
+ORDER BY total_spend DESC;

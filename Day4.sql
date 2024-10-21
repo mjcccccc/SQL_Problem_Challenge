@@ -72,9 +72,26 @@ ORDER BY total_spend DESC;
 Question: Get the details of the employee with the second-highest salary from each department
 
 */
+-- Creating Table 
+CREATE TABLE Employee(
+	employee_id INT IDENTITY(1,1)  PRIMARY KEY,
+	name VARCHAR(50),
+	department VARCHAR(50),
+	salary DECIMAL (10, 2)
+);
+
+INSERT INTO Employee (name, department, salary) VALUES 
+('John Doe', 'Engineering', 63000),
+('Jane Smith', 'Engineering', 55000),
+('Michael Johnson', 'Engineering', 64000),
+('Emily Davis', 'Marketing', 58000),
+('Chris Brown', 'Marketing', 56000),
+('Emma Wilson', 'Marketing', 59000),
+('Alex Lee', 'Sales', 58000),
+('Sarah Adams', 'Sales', 58000),
+('Ryan Clark', 'Sales', 61000);
 
 -- 2nd highest salary per department
-
 SELECT * FROM Employee;
 
 SELECT 
